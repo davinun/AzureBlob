@@ -29,10 +29,26 @@ public class BlobApiTest {
     }
 
     @Test
+    public void testDownloadFile() {
+        try {
+            BlobConfig conf = config();
+            BlobApi blobApi = new BlobApi(conf);
+
+            System.out.println("Start downloading file");
+            String fileName = "file.jpg";
+            File aFile = new File("c:/DELETE/temp/file-downloaded.jpg");
+            blobApi.download(fileName, aFile);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
     public void testUploadFile() {
         try {
             BlobConfig conf = config();
-            conf.setUploadBufferSize(100000000); //10MB
             BlobApi blobApi = new BlobApi(conf);
 
             System.out.println("Start uploading file");

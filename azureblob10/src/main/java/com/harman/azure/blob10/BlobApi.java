@@ -1,6 +1,7 @@
 package com.harman.azure.blob10;
 
 import com.microsoft.azure.storage.blob.*;
+import com.microsoft.azure.storage.blob.models.BlobDownloadHeaders;
 import com.microsoft.azure.storage.blob.models.BlockBlobUploadResponse;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpPipeline;
@@ -41,6 +42,23 @@ public class BlobApi {
         ServiceURL serviceURL = new ServiceURL(u, pipeline);
 
         containerURL = serviceURL.createContainerURL(config.getContainerName());
+
+    }
+
+    public void download(String blobFileName, File targetLocalFile) throws Exception {
+//        DownloadResponse resp = blobURL.download().blockingGet();
+//        TransferManager.downloadBlobToFile()
+//        System.out.println(resp);
+
+        BlockBlobURL blobURL = containerURL.createBlockBlobURL(blobFileName);
+
+        AsynchronousFileChannel fileChannel = AsynchronousFileChannel.open(targetLocalFile.toPath(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+
+        BlobDownloadHeaders resp = TransferManager.downloadBlobToFile(fileChannel, blobURL, null, null)
+                .blockingGet();
+
+        System.out.println("Completed download request.");
+        System.out.println("The blob was downloaded to " + targetLocalFile.getAbsolutePath());
 
     }
 
