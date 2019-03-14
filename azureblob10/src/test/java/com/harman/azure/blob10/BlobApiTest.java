@@ -32,6 +32,7 @@ public class BlobApiTest {
     public void testUploadFile() {
         try {
             BlobConfig conf = config();
+            conf.setUploadBufferSize(100000000); //10MB
             BlobApi blobApi = new BlobApi(conf);
 
             System.out.println("Start uploading file");
@@ -52,8 +53,8 @@ public class BlobApiTest {
 
             System.out.println("Start uploading stream");
 //            File bFile = new File("c:/DELETE/temp/HelloWorld.txt");
-            File bFile = new File("c:/DELETE/temp/file.jpg");
-//            File bFile = new File("c:/DELETE/temp/pgadmin4-4.2-x86.exe");
+//            File bFile = new File("c:/DELETE/temp/file.jpg");
+            File bFile = new File("c:/DELETE/temp/pgadmin4-4.2-x86.exe");
             blobApi.uploadStream(bFile);
 
         } catch (Exception e) {

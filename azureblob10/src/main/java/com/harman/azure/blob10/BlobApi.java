@@ -48,7 +48,7 @@ public class BlobApi {
 
         BlockBlobURL blobURL = containerURL.createBlockBlobURL(inFile.getName());
 
-        int blockSize = 2048000;
+        int blockSize = config.getUploadBufferSize();
         long fileSize = inFile.length();
         int numBlocks = Math.max((int)(fileSize / blockSize), 2);
 

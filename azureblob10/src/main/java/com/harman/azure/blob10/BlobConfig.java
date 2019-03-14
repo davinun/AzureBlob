@@ -4,6 +4,7 @@ public class BlobConfig {
     private String accountName;
     private String accountKey;
     private String containerName;
+    private int uploadBufferSize = 100000000; //default 10MB
 
     public BlobConfig(String accountName, String accountKey, String containerName) {
         this.accountName = accountName;
@@ -33,5 +34,13 @@ public class BlobConfig {
 
     public void setContainerName(String containerName) {
         this.containerName = containerName;
+    }
+
+    public int getUploadBufferSize() {
+        return uploadBufferSize;
+    }
+
+    public void setUploadBufferSize(int uploadBufferSize) {
+        this.uploadBufferSize = uploadBufferSize;
     }
 }
